@@ -1,0 +1,113 @@
+@if (isModal) {
+<div class="fixed flex items-center justify-center w-full h-full">
+  <form
+    action="createHabito"
+    class="w-96 h-fit flex flex-col flex-nowrap gap-4 bg-fuchsia-950 rounded-md p-4 text-white"
+  >
+    <div class="w-full">
+      <label class="block" for="name">Name</label>
+      <input
+        id="name"
+        placeholder="New Habit Name"
+        name="name"
+        class="w-full pl-2 border bg-fuchsia-900 rounded-md border-purple-950 focus:border-purple-900 focus:outline-none"
+        type="text"
+        [(ngModel)]="newHabit.name"
+      />
+    </div>
+    <div class="w-full h-fit">
+      <label class="block" for="description">Mensaje:</label>
+      <textarea
+        id="description"
+        class="MessageTexArea w-full min-h-36 border bg-fuchsia-900 border-purple-950 focus:border-purple-900 focus:outline-none rounded-md p-2"
+        name="mensaje"
+        [(ngModel)]="newHabit.description"
+      ></textarea>
+    </div>
+    <div class="w-full">
+      <label class="block" for="tag">Tag:</label>
+      <select
+        class="w-full h-10 border border-blue-950 bg-fuchsia-900 focus:border-blue-900 focus:outline-none rounded-md pl-2"
+        name="tag"
+        id="tag"
+        [(ngModel)]="newHabit.tag"
+      >
+        <option value="Job" selected>Job</option>
+        <option value="Training">Training</option>
+        <option value="Study">Study</option>
+      </select>
+    </div>
+    <button
+      class="py-2 px-4 bg-purple-950 hover:bg-purple-900 transition-all"
+      type="button"
+      (click)="CreateHabit()"
+    >
+      Crear
+    </button>
+  </form>
+</div>
+}
+
+<article class="w-full h-full md:min-h-screen flex flex-col items-center justify-center">
+  <header class="flex flex-row items-center justify-center gap-4 my-10">
+    <h1 class="text-3xl font-medium">Create a habit</h1>
+    <button
+      type="button"
+      class="py-2 px-4 bg-purple-950 hover:bg-purple-900 transition-all text-white rounded-md"
+      (click)="Create()"
+    >
+      Create
+    </button>
+  </header>
+  <main class="w-full">
+    <div
+      class="w-full h-full flex flex-col md:flex-row md:flex-wrap gap-4 items-center justify-center"
+    >
+      <div class="w-80 md:w-96 min-h-[250px] flex flex-col items-start justify-center gap-4">
+        <h2 class="text-2xl font-bold">Initiated</h2>
+        <div
+          class="w-80 min-h-[200px] bg-[#190927] flex flex-col flex-nowrap items-center justify-start border border-gray-400 shadow-slate-400 shadow-md p-4 md:p-10 gap-4 rounded-md"
+          cdkDropList
+          id="initList"
+          [cdkDropListData]="habitsInit"
+          [cdkDropListConnectedTo]="['stageList', 'finishList']"
+          (cdkDropListDropped)="drop($event)"
+        >
+          @for (habit of habitsInit; track $index) {
+          <app-cart-habito cdkDrag [habit]="habit" />
+          }
+        </div>
+      </div>
+      <div class="w-80 md:w-96 min-h-[250px] flex flex-col items-start justify-center gap-4">
+        <h2 class="text-2xl font-bold">Stage</h2>
+        <div
+          class="w-80 min-h-[200px] bg-[#190927] flex flex-col flex-nowrap items-center justify-start border border-gray-400 shadow-slate-400 shadow-md p-4 md:p-10 gap-4 rounded-md"
+          cdkDropList
+          id="stageList"
+          [cdkDropListData]="habitsStage"
+          [cdkDropListConnectedTo]="['initList', 'finishList']"
+          (cdkDropListDropped)="drop($event)"
+        >
+          @for (habit of habitsStage; track $index) {
+          <app-cart-habito cdkDrag [habit]="habit" />
+          }
+        </div>
+      </div>
+      <div class="w-80 md:w-96 min-h-[250px] flex flex-col items-start justify-center gap-4">
+        <h2 class="text-2xl font-bold">Finished</h2>
+        <div
+          class="w-80 min-h-[200px] bg-[#190927] flex flex-col flex-nowrap items-center justify-start border border-gray-400 shadow-slate-400 shadow-md p-4 md:p-10 gap-4 rounded-md"
+          cdkDropList
+          id="finishList"
+          [cdkDropListData]="habitsFinish"
+          [cdkDropListConnectedTo]="['initList', 'stageList']"
+          (cdkDropListDropped)="drop($event)"
+        >
+          @for (habit of habitsFinish; track $index) {
+          <app-cart-habito cdkDrag [habit]="habit" />
+          }
+        </div>
+      </div>
+    </div>
+  </main>
+</article>
