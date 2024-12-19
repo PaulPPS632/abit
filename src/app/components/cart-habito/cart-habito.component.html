@@ -1,5 +1,12 @@
-<div class="min-w-64 h-fit flex flex-col items-start justify-start bg-purple-900 p-4 rounded-md cursor-pointer">
-    <p>Name: {{habit.name}}</p>
-    <p>Description: {{habit.description}}</p>
-    <p>Tag: {{habit.tag}}</p>
+<div class="relative min-w-64 h-fit flex flex-col items-start justify-start bg-purple-900 p-4 rounded-md cursor-pointer">
+    <div>
+        <p><strong>Name: </strong>{{habit.name}}</p>
+        <p><strong>Description: </strong>{{habit.description}}</p>
+        <p><strong>Tag: </strong>{{habit.tag}}</p>
+    </div>
+    <div class="absolute top-2 right-2" (click)="onHabitClick()">
+        <svg class="w-6 h-6 text-gray-300 hover:text-gray-200 hover:scale-105 transition-all" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 9-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+          </svg>
+    </div>
 </div>

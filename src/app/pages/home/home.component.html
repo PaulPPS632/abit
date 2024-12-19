@@ -1,8 +1,8 @@
 @if (isModal) {
-<div class="fixed flex items-center justify-center w-full h-full">
+<div class="fixed z-50 flex items-center justify-center w-full h-full bg-black/80">
   <form
     action="createHabito"
-    class="w-96 h-fit flex flex-col flex-nowrap gap-4 bg-fuchsia-950 rounded-md p-4 text-white"
+    class="w-80 md:w-96 h-fit flex flex-col flex-nowrap gap-4 bg-fuchsia-950 rounded-md p-4 text-white"
   >
     <div class="w-full">
       <label class="block" for="name">Name</label>
@@ -74,7 +74,7 @@
           (cdkDropListDropped)="drop($event)"
         >
           @for (habit of habitsInit; track $index) {
-          <app-cart-habito cdkDrag [habit]="habit" />
+          <app-cart-habito cdkDrag [habit]="habit" (habitClicked)="onHabitClick($event)" />
           }
         </div>
       </div>
@@ -89,7 +89,7 @@
           (cdkDropListDropped)="drop($event)"
         >
           @for (habit of habitsStage; track $index) {
-          <app-cart-habito cdkDrag [habit]="habit" />
+          <app-cart-habito cdkDrag [habit]="habit" (habitClicked)="onHabitClick($event)"/>
           }
         </div>
       </div>
@@ -104,7 +104,7 @@
           (cdkDropListDropped)="drop($event)"
         >
           @for (habit of habitsFinish; track $index) {
-          <app-cart-habito cdkDrag [habit]="habit" />
+          <app-cart-habito cdkDrag [habit]="habit" (habitClicked)="onHabitClick($event)"/>
           }
         </div>
       </div>

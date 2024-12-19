@@ -70,6 +70,9 @@ export class HomeComponent implements OnInit{
       this.habitoService.updateHabit(movedHabit);
     }
   }
+  onHabitClick(habit: Habito) {
+    this.habitoService.removeHabit(habit.id);
+  }
   Create(){
     this.toggleModal();
   }

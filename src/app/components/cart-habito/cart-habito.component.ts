@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Habito } from '../../models/habito';
 
 @Component({
@@ -17,5 +17,8 @@ export class CartHabitoComponent {
     description:'',
     status: ''
   };
-
+  @Output() habitClicked = new EventEmitter<Habito>(); 
+  onHabitClick() {
+    this.habitClicked.emit(this.habit); // Emitir el habit al hacer clic
+  }
 }
